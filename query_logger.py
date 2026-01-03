@@ -47,7 +47,7 @@ def log_attempt(
     """Log a single query attempt. Opens and closes connection per call."""
     log_path = _get_log_path(config)
 
-    con = duckdb.connect(log_path)
+    con = duckdb.connect(log_path, config={'access_mode': 'automatic'})
     try:
         _init_log_table(con)
         con.execute("""
